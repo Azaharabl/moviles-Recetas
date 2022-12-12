@@ -14,7 +14,7 @@ class FragmentHome : Fragment() ,  ActionOnClickListener {
 
     lateinit var  binding : FragmentHomeBinding
     private lateinit var mGridLayoutManager: GridLayoutManager
-    private lateinit var mAdapter:AzaAdapter
+    private lateinit var mAdapter:RecetasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,8 +38,17 @@ class FragmentHome : Fragment() ,  ActionOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_fragmentAdd_to_fragmentHome)
         }
 
+        setupRecyclerView()
 
+    }
+    private fun setupRecyclerView() {
+        mAdapter = RecetasAdapter(mutableListOf(),this)
+        mGridLayoutManager = GridLayoutManager(requireContext(),2)
 
-
+        binding.recycler.apply {
+            setHasFixedSize(true)
+            layoutManager = mGridLayoutManager
+            adapter = mAdapter
+        }
     }
 }
